@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Your Cart | M SUDAISE Furniture Store</title>
+<meta name="description" content="Review your items and send your order on WhatsApp to M SUDAISE Furniture Store, Katwe, Kampala.">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#4a5d23">
+<link rel="icon" href="logo.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="M SUDAISE Furniture Store"><meta property="og:title" content="Your Cart | M SUDAISE Furniture Store"><meta property="og:description" content="Review your items and send your order on WhatsApp to M SUDAISE Furniture Store, Katwe, Kampala."><meta property="og:image" content="hero.png">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="style.css"></head><body>
+<div class="page-h"><div class="wrap"><h1>Shopping Cart</h1></div></div>
+<main class="wrap">
+ <div class="two">
+  <div class="box"><h3>Your Items</h3><div id="items"></div></div>
+  <form class="box f" id="co" onsubmit="event.preventDefault();order()"><h3>Your details</h3>
+   <label>Full name<input name="name" required></label>
+   <label>Phone number<input name="phone" type="tel" required placeholder="07xx xxx xxx"></label>
+   <label>Delivery address / location<textarea name="addr" rows="2" required placeholder="Area, street, landmark"></textarea></label>
+   <div class="pay"><label><input type="radio" name="pay" value="Cash on Delivery" checked> 💵 Cash on Delivery</label>
+   <label><input type="radio" name="pay" value="Mobile Money"> 📱 Mobile Money</label></div>
+   <div class="sum" id="sum"></div>
+   <div class="note">📍 Shop: <span id="loc"></span><br>Delivery fee is agreed with us on WhatsApp.</div>
+   <button class="btn wa" style="justify-content:center">Send Order on WhatsApp</button>
+  </form>
+ </div>
+</main>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+layout('cart.html');
+document.getElementById('loc').textContent=Store.settings().location;
+function lines(){const P=Store.products();return Cart.get().map(i=>({...i,p:P.find(x=>x.id===i.id)})).filter(x=>x.p)}
+function total(){return lines().reduce((a,x)=>a+x.p.price*x.q,0)}
+function draw(){
+  const L=lines();
+  document.getElementById('items').innerHTML=L.length?L.map(x=>`<div class="ci"><img src="${img(x.p)}"><div><b>${esc(x.p.name)}</b><div class="price">${fmt(x.p.price)}</div>
+  <div class="qty" style="margin-top:4px"><button onclick="chg('${x.id}',-1)">−</button><span>${x.q}</span><button onclick="chg('${x.id}',1)">+</button></div></div>
+  <div style="text-align:right"><b>${fmt(x.p.price*x.q)}</b><br><button class="btn red sm" onclick="rm('${x.id}')">Remove</button></div></div>`).join(''):'<p class="empty">Your cart is empty. <a href="shop.html" style="color:var(--g);font-weight:700">Start shopping →</a></p>';
+  document.getElementById('sum').innerHTML=`<div class="tot"><span>Total</span><span>${fmt(total())}</span></div>`;
+}
+function chg(id,d){const c=Cart.get(),i=c.find(x=>x.id===id),p=Store.products().find(x=>x.id===id);i.q=Math.max(1,Math.min(p.stock||99,i.q+d));Cart.save(c);draw()}
+function rm(id){Cart.save(Cart.get().filter(x=>x.id!==id));draw()}
+function order(){
+  const f=document.getElementById('co'),L=lines();if(!L.length)return toast('Your cart is empty');
+  const t=`*New order – M SUDAISE*\n`+L.map(x=>`• ${x.p.name} x${x.q} = ${fmt(x.p.price*x.q)}`).join('\n')+`\n*Total: ${fmt(total())}* (delivery fee to be agreed)\n\nName: ${f.name.value}\nPhone: ${f.phone.value}\nAddress: ${f.addr.value}\nPayment: ${f.pay.value}`;
+  window.location.href=waLink(t);
+}
+Store.load().then(draw);
+</script></body></html>

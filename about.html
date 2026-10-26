@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>About & Contact | M SUDAISE Furniture Store, Katwe Kampala</title>
+<meta name="description" content="About M SUDAISE Furniture Store, an office and salon furniture shop in Katwe, Kampala, Uganda. Call 0704 710 896 or WhatsApp us.">
+<meta name="keywords" content="M SUDAISE contact, furniture shop Katwe, Kampala furniture store">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4a5d23">
+<link rel="icon" href="logo.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="M SUDAISE Furniture Store"><meta property="og:title" content="About & Contact | M SUDAISE Furniture Store, Katwe Kampala"><meta property="og:description" content="About M SUDAISE Furniture Store, an office and salon furniture shop in Katwe, Kampala, Uganda. Call 0704 710 896 or WhatsApp us."><meta property="og:image" content="hero.png">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="style.css"></head><body>
+<div class="page-h"><div class="wrap"><h1>About Us & Contact</h1></div></div>
+<main class="wrap">
+ <img class="about-img" src="shop.png" alt="M SUDAISE shop" onerror="this.remove()">
+ <section class="two" style="grid-template-columns:1.2fr 1fr">
+  <div class="box"><h3>Who we are</h3>
+   <p>M SUDAISE is an office and salon furniture shop serving businesses and individuals across Uganda. We supply durable, stylish and affordable chairs, desks, cabinets, salon and barber equipment and accessories.</p>
+   <p style="margin-top:10px">Our goal is simple: help you furnish your office or salon with quality products, delivered to your door, with payment options that suit you.</p></div>
+  <div class="box"><h3>Why choose us</h3><p>✔ Quality, long-lasting furniture<br>✔ Fair prices in UGX<br>✔ Delivery to your location<br>✔ Cash on delivery & mobile money<br>✔ WhatsApp ordering and support</p></div>
+ </section>
+ <section class="sec three" id="contact">
+  <div class="box"><h3>📍 Visit us</h3><p id="loc"></p><p id="hrs" style="margin-top:6px"></p></div>
+  <div class="box"><h3>📞 Call or chat</h3><p id="ph"></p><p id="em"></p><a class="btn wa sm" id="wab" target="_blank" style="margin-top:10px">Chat on WhatsApp</a></div>
+  <form class="box f" onsubmit="event.preventDefault();send(this)"><h3>Send a message</h3>
+   <input name="n" placeholder="Your name" required><input name="p" placeholder="Phone number" required><textarea name="m" rows="3" placeholder="How can we help?" required></textarea><button class="btn">Send via WhatsApp</button></form>
+ </section>
+</main>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+layout('about.html');
+const s=Store.settings();
+loc.textContent=s.location;hrs.textContent='🕒 '+s.hours;ph.textContent='📱 '+s.phone;em.textContent='✉️ '+s.email;wab.href=waLink('Hello M SUDAISE, I need help.');
+function send(f){window.open(waLink(`Message from ${f.n.value} (${f.p.value}): ${f.m.value}`),'_blank');f.reset()}
+</script></body></html>

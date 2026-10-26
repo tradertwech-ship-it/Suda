@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Shop Office & Salon Furniture | M SUDAISE Furniture Store</title>
+<meta name="description" content="Browse office chairs, desks, salon chairs, barber chairs, wash basins, mirrors and trolleys from M SUDAISE Furniture Store, Katwe, Kampala. Prices in UGX, order via WhatsApp.">
+<meta name="keywords" content="office furniture prices Uganda, salon chairs Kampala, barber chair UGX, M SUDAISE shop">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4a5d23">
+<link rel="icon" href="logo.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="M SUDAISE Furniture Store"><meta property="og:title" content="Shop Office & Salon Furniture | M SUDAISE Furniture Store"><meta property="og:description" content="Browse office chairs, desks, salon chairs, barber chairs, wash basins, mirrors and trolleys from M SUDAISE Furniture Store, Katwe, Kampala. Prices in UGX, order via WhatsApp."><meta property="og:image" content="hero.png">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="style.css"></head><body>
+<div class="page-h"><div class="wrap"><h1 id="ttl">Shop All Products</h1><p id="cnt" style="color:var(--mut)"></p></div></div>
+<main class="wrap">
+ <div class="toolbar">
+  <input id="q" placeholder="Search products..." oninput="draw()">
+  <select id="sort" onchange="draw()"><option value="">Sort: Featured</option><option value="lo">Price: Low to High</option><option value="hi">Price: High to Low</option><option value="az">Name A–Z</option></select>
+  <select id="maxp" onchange="draw()"><option value="0">Any price</option><option value="300000">Under UGX 300,000</option><option value="600000">Under UGX 600,000</option><option value="1000000">Under UGX 1,000,000</option></select>
+ </div>
+ <div class="toolbar" id="chips"></div>
+ <div class="grid" id="grid"></div>
+</main>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+layout('shop.html');
+const U=new URLSearchParams(location.search);
+let g=U.get('g')||'',c=U.get('c')||'',wishOnly=U.get('wish')==='1';
+document.getElementById('q').value=U.get('q')||'';
+function chips(){
+  const all=[['','All'],...Object.entries(CATS).map(([k,v])=>[k,v.label])];
+  let h=all.map(([k,l])=>`<button class="chip ${!c&&g===k?'on':''}" onclick="g='${k}';c='';chips();draw()">${l}</button>`).join('');
+  const subs=g?CATS[g].items:[];
+  if(subs.length>1)h+='<span style="width:100%"></span>'+subs.map(s=>`<button class="chip ${c===s?'on':''}" onclick="c='${s}';chips();draw()">${ICON[s]} ${s}</button>`).join('');
+  document.getElementById('chips').innerHTML=h;
+}
+function draw(){
+  let L=Store.products();const q=document.getElementById('q').value.toLowerCase().trim(),mp=+document.getElementById('maxp').value,s=document.getElementById('sort').value;
+  if(wishOnly)L=L.filter(p=>Wish.get().includes(p.id));
+  if(c)L=L.filter(p=>p.category===c);else if(g)L=L.filter(p=>groupOf(p.category)===g);
+  if(q)L=L.filter(p=>(p.name+p.category+p.desc).toLowerCase().includes(q));
+  if(mp)L=L.filter(p=>p.price<=mp);
+  if(s==='lo')L.sort((a,b)=>a.price-b.price);if(s==='hi')L.sort((a,b)=>b.price-a.price);if(s==='az')L.sort((a,b)=>a.name.localeCompare(b.name));
+  document.getElementById('ttl').textContent=wishOnly?'My Wishlist':c||(g?CATS[g].label:'Shop All Products');
+  document.getElementById('cnt').textContent=L.length+' product'+(L.length==1?'':'s');
+  document.getElementById('grid').innerHTML=L.map(card).join('')||'<p class="empty">No products found.</p>';
+}
+chips();document.getElementById('grid').innerHTML='<p class="empty">Loading products...</p>';Store.load().then(draw);
+</script></body></html>

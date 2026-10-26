@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>M SUDAISE Furniture Store | Office & Salon Furniture in Katwe, Kampala</title>
+<meta name="description" content="M SUDAISE Furniture Store in Katwe, Kampala, Uganda. Buy office chairs, desks, reception chairs, filing cabinets, salon chairs, barber chairs, wash basins, mirrors, trolleys and accessories. Order on WhatsApp 0704 710 896.">
+<meta name="keywords" content="M SUDAISE furniture store, office furniture Kampala, salon furniture Uganda, barber chairs, salon chairs, office chairs, Katwe furniture shop">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4a5d23">
+<link rel="icon" href="logo.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="M SUDAISE Furniture Store"><meta property="og:title" content="M SUDAISE Furniture Store | Office & Salon Furniture in Katwe, Kampala"><meta property="og:description" content="M SUDAISE Furniture Store in Katwe, Kampala, Uganda. Buy office chairs, desks, reception chairs, filing cabinets, salon chairs, barber chairs, wash basins, mirrors, trolleys and accessories. Order on WhatsApp 0704 710 896."><meta property="og:image" content="hero.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FurnitureStore", "name": "M SUDAISE Furniture Store", "alternateName": ["M SUDAISE", "M SUDAISE Office & Saloon Furniture & Accessories Shop"], "description": "M SUDAISE Furniture Store in Katwe, Kampala, Uganda. Buy office chairs, desks, reception chairs, filing cabinets, salon chairs, barber chairs, wash basins, mirrors, trolleys and accessories. Order on WhatsApp 0704 710 896.", "url": "https://YOUR-SITE-URL/", "telephone": "+256704710896", "email": "suddamugisha4@icloud.com", "image": "https://YOUR-SITE-URL/hero.png", "logo": "https://YOUR-SITE-URL/logo.png", "address": {"@type": "PostalAddress", "streetAddress": "Katwe, before Total", "addressLocality": "Kampala", "addressCountry": "UG"}, "priceRange": "UGX", "openingHours": "Mo-Sa 08:00-18:00"}</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+<link rel="stylesheet" href="style.css"></head><body>
+<main class="wrap">
+ <section class="hero"><div class="t"><h1>Premium Furniture for Your Office and Salon</h1><div class="tags">Stylish · Durable · Affordable</div><p>Chairs, desks, cabinets, salon equipment and accessories delivered to your door.</p><a class="btn" href="shop.html">Shop Now →</a></div><div></div></section>
+ <section class="cats" id="cats"></section>
+ <section class="sec"><h2>Top Picks For You <a href="shop.html">See all products →</a></h2><div class="grid" id="top"></div></section>
+ <section class="promos">
+  <a class="promo" href="shop.html?g=office"><h3>Modern Office Furniture</h3><span>Shop Now →</span></a>
+  <a class="promo" href="shop.html?g=salon"><h3>Stylish Salon Equipment</h3><span>Shop Now →</span></a>
+  <a class="promo" href="shop.html?g=acc"><h3>Quality Accessories</h3><span>Shop Now →</span></a>
+ </section>
+ <section class="sec"><h2>Best Selling Products ❤ <a href="shop.html">View more →</a></h2><div class="grid" id="best"></div></section>
+ <section class="news"><div><h2>Stay in the Loop</h2><p>Get exclusive deals and new arrivals.</p></div>
+  <form onsubmit="event.preventDefault();toast('Thanks for subscribing!');this.reset()"><input type="email" required placeholder="Enter your email address"><button class="btn">Subscribe</button></form></section>
+ <section class="trust"><div><b>🚚 Delivery</b>Arranged on WhatsApp</div><div><b>↩ Easy Returns</b>30 days return policy</div><div><b>🔒 Secure Payments</b>Cash on Delivery & Mobile Money</div><div><b>🎧 24/7 Support</b>We're here to help</div></section>
+</main>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+layout('index.html');
+Store.load().then(()=>{
+const P=Store.products();
+document.getElementById('cats').innerHTML=Object.values(CATS).flatMap(c=>c.items).map(i=>`<a class="cat" href="shop.html?c=${encodeURIComponent(i)}"><span>${ICON[i]}</span>${i}</a>`).join('');
+document.getElementById('top').innerHTML=P.filter(p=>p.featured).slice(0,4).map(card).join('')||'<p class="empty">No products yet.</p>';
+document.getElementById('best').innerHTML=P.filter(p=>p.best).slice(0,4).map(card).join('');
+});
+</script></body></html>
