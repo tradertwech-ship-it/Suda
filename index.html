@@ -20,8 +20,7 @@ var s=document.createElement('script');s.type='application/ld+json';s.text=JSON.
 <link rel="stylesheet" href="style.css"></head><body>
 <main class="wrap">
  <section class="hero"><div class="t"><h1>Premium Furniture for Your Office and Salon</h1><div class="tags">Stylish · Durable · Affordable</div><p>Chairs, desks, cabinets, salon equipment and accessories delivered to your door.</p><a class="btn" href="shop.html">Shop Now →</a></div><div></div></section>
- <section class="cats" id="cats"></section>
- <section class="sec"><h2>Top Picks For You <a href="shop.html">See all products →</a></h2><div class="grid" id="top"></div></section>
+  <section class="sec"><h2>Top Picks For You <a href="shop.html">See all products →</a></h2><div class="grid" id="top"></div></section>
  <section class="promos">
   <a class="promo" href="shop.html?g=office"><h3>Modern Office Furniture</h3><span>Shop Now →</span></a>
   <a class="promo" href="shop.html?g=salon"><h3>Stylish Salon Equipment</h3><span>Shop Now →</span></a>
@@ -38,7 +37,6 @@ var s=document.createElement('script');s.type='application/ld+json';s.text=JSON.
 layout('index.html');
 Store.load().then(()=>{
 const P=Store.products();
-document.getElementById('cats').innerHTML=Object.values(CATS).flatMap(c=>c.items).map(i=>`<a class="cat" href="shop.html?c=${encodeURIComponent(i)}"><span>${ICON[i]}</span>${i}</a>`).join('');
 document.getElementById('top').innerHTML=P.filter(p=>p.featured).slice(0,4).map(card).join('')||'<p class="empty">No products yet.</p>';
 document.getElementById('best').innerHTML=P.filter(p=>p.best).slice(0,4).map(card).join('');
 });
