@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://YOUR-SITE-URL/</loc></url>
-<url><loc>https://YOUR-SITE-URL/shop.html</loc></url>
-<url><loc>https://YOUR-SITE-URL/about.html</loc></url>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+       <loc>https://msudais.vercel.app/</loc>
+       <lastmod>2026-10-28T16:23:24+00:00</lastmod>
+       <priority>1.0000</priority>
+  </url>
+  <url>
+       <loc>https://msudais.vercel.app/shop.html</loc>
+       <lastmod>2026-10-28T16:23:24+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://msudais.vercel.app/shop.html?g=office</loc>
+       <lastmod>2026-10-28T16:23:24+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://msudais.vercel.app/shop.html?g=salon</loc>
+       <lastmod>2026-10-28T16:23:24+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://msudais.vercel.app/shop.html?g=acc</loc>
+       <lastmod>2026-10-28T16:23:24+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://msudais.vercel.app/index.html</loc>
+       <lastmod>2026-10-28T16:23:24+00:00</lastmod>
+       <priority>0.5120</priority>
+  </url>
+  <url>
+       <loc>https://msudais.vercel.app/shop.html?wish=1</loc>
+       <lastmod>2026-10-28T16:23:24+00:00</lastmod>
+       <priority>0.5120</priority>
+  </url>
+  <url>
+       <loc>https://msudais.vercel.app/about.html</loc>
+       <lastmod>2026-10-28T16:23:24+00:00</lastmod>
+       <priority>0.5120</priority>
+  </url>
 </urlset>
